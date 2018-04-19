@@ -32,40 +32,40 @@ public class ExampleGUINo1 extends JFrame {
         new JTextField(15),
         new JTextField(15),
         new JTextField(15),
-        new JRadioButton(),
         new JTextField(10),
         new JRadioButton(),
-        new JTextField(),
-        new JTextField(),
-        new JTextField(),
-        new JTextField(),
+        new JRadioButton(),
+        new JTextField(20),
+        new JTextField(20),
+        new JTextField(2),
+        new JTextField(10),
         new JRadioButton(),
         new JRadioButton(),
         new JRadioButton(),
+        new JTextField(30),
         new JRadioButton(),
-        new JTextField(),
         new JRadioButton(),
         new JRadioButton()
     };
     
     static String[] stringLabels = {
-        "FirstName: ",
-        "LastName: ",
-        "Email Address: ",
-        "Phone Number(no dashes): ",
-        "I prefer not to give my email address: ",
-        "Street Name: ",
-        "City: ",
-        "State: ",
-        "Zip Code: ",
-        "I prefer not to give my address: ", 
-        "I want email notifications: ",
-        "I want text notifications: ",
-        "I want to be contacted about volunteer information: ",
-        "What do you like best about ReStore?",
-        "I prefer not to answer",
-        "I allow this discription to be quoted:",
-        "I do not allow this discription to be quoted:",
+        "FirstName:  ",
+        "LastName:  ",
+        "Email Address:  ",
+        "Phone Number(no dashes):  ",
+        "I prefer not to give my email address:  ",
+        "Street Name:  ",
+        "City:  ",
+        "State:  ",
+        "Zip Code:  ",
+        "I prefer not to give my address:  ", 
+        "I want email notifications:  ",
+        "I want text notifications:  ",
+        "I want to be contacted about volunteer information:  ",
+        "What do you like best about ReStore?  ",
+        "I prefer not to answer:  ",
+        "I allow this discription to be quoted:  ",
+        "I do not allow this discription to be quoted:  ",
     };
     
     public static JComponent setDualColumnFormat(String[] stringLabels, JComponent[] components) {
@@ -166,6 +166,30 @@ public class ExampleGUINo1 extends JFrame {
         frame.setVisible(true);
     }
 */
+    
+    private static boolean validateEmail() {
+        
+    }
+    
+    private static int editPhoneNum() {
+        
+    }
+    
+    private static boolean validatePhoneNum() {
+        
+    }
+    
+    private static boolean validateAddress() {
+        
+    }
+    
+    private static String editState() {
+        
+    }
+    
+    private static boolean validateState() {
+        
+    }
     
     private class ActionButtonHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
