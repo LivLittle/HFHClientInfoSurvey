@@ -63,16 +63,53 @@ public class ExampleGUINo1 extends JFrame {
     };
     
     public ExampleGUINo1() {
+        JFrame frame = new JFrame("Restore Client Survery");
         JComponent labelsAndComps = setDualColumnFormat(stringLabels, components);
         JComponent panelContainer = new JPanel(new BorderLayout(5, 5));
-        panelContainer.add(new JLabel("Purchase Form", SwingConstants.CENTER), BorderLayout.PAGE_START);
+        panelContainer.add(new JLabel("Welcome to Restore! Please fill out this form so we can get in contact with you!", SwingConstants.CENTER), BorderLayout.PAGE_START);
         panelContainer.add(labelsAndComps, BorderLayout.CENTER);
+
+        JRadioButton radioButtons[] = new JRadioButton[7];
+        JTextField textFields[] = new JTextField[8];
+        
+        for (int i=0; i < components.length; i++) {
+            if(components[i] instanceof JRadioButton) {
+                radioButtons[i] = (JRadioButton)components[i];
+            }
+            if(components[i] instanceof JTextField) {
+                textFields[i] = (JTextField)components[i];
+            }
+        }    
+        
+        frame.add(panelContainer);
+        frame.setSize(1000,430);
+        frame.setVisible(true);
         
         actionHandler = new ActionComponentHandler();
-        
-        testBasicGUI();
-        
-        JOptionPane.showMessageDialog(null, labelsAndComps);
+                
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        frame.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                for (JTextField textField : textFields) {
+                    System.out.println(textField.getText());
+                }
+                
+                for(JRadioButton radioButton : radioButtons) {
+                    if (radioButton.isSelected() ==  true) {
+                        System.out.println("true");
+                    }
+                    else if (radioButton.isSelected() == false) {
+                        System.out.println("false");
+                    }
+                    else {
+                        System.out.println("borked");
+                    }
+                }
+                
+                System.exit(0);
+            }
+        });
     }
     
     public static JComponent setDualColumnFormat(String[] stringLabels, JComponent[] components) {
@@ -122,6 +159,9 @@ public class ExampleGUINo1 extends JFrame {
 //        for(Component component : components) {
 //            System.out.print(component.getAccessibleContext());
 //        }
+        
+//        System.out.print(component[0]);
+        
     }
     
 //    private static boolean validateEmail() {
