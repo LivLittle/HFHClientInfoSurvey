@@ -3,7 +3,7 @@
  * This file is an example of how the GUI for the Habitat for humanity form will look.
  * This file will not yet connect to the actual database
  */
-package exampleguino1;
+package basicguiwithpopup;
 
 import java.awt.FlowLayout;
 import javax.swing.JButton;
@@ -18,7 +18,7 @@ import javax.swing.*;
 import java.awt.*;
 
 
-public class ExampleGUINo1 extends JFrame {
+public class BasicGuiWithPopUp extends JFrame {
     
     private ActionComponentHandler actionHandler;
     
@@ -62,15 +62,22 @@ public class ExampleGUINo1 extends JFrame {
         "I do not allow this discription to be quoted:  ",
     };
     
-    public ExampleGUINo1() {
+    public BasicGuiWithPopUp() {
         JFrame frame = new JFrame("Restore Client Survery");
         JComponent labelsAndComps = setDualColumnFormat(stringLabels, components);
+        ///////
+        JButton submit = new JButton("Submit");
         JComponent panelContainer = new JPanel(new BorderLayout(5, 5));
         panelContainer.add(new JLabel("Welcome to Restore! Please fill out this form so we can get in contact with you!", SwingConstants.CENTER), BorderLayout.PAGE_START);
         panelContainer.add(labelsAndComps, BorderLayout.CENTER);
+        /////////
+        panelContainer.add(submit, BorderLayout.SOUTH);
 
         JRadioButton radioButtons[] = new JRadioButton[7];
         JTextField textFields[] = new JTextField[8];
+        
+        
+        
         
 //        for (int i=0; i < components.length; i++) {
 //            if(components[i] instanceof JRadioButton) {
@@ -85,31 +92,40 @@ public class ExampleGUINo1 extends JFrame {
         frame.setSize(1000,430);
         frame.setVisible(true);
         
+        
         actionHandler = new ActionComponentHandler();
                 
-        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        frame.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                for (JTextField textField : textFields) {
-                    System.out.println(textField.getText());
-                }
+//        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+//        frame.addWindowListener(new java.awt.event.WindowAdapter() {
+//            @Override
+//            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+//                for (JTextField textField : textFields) {
+//                    System.out.println(textField.getText());
+//                }
+//                
+//                for(JRadioButton radioButton : radioButtons) {
+//                    if (radioButton.isSelected() ==  true) {
+//                        System.out.println("true");
+//                    }
+//                    else if (radioButton.isSelected() == false) {
+//                        System.out.println("false");
+//                    }
+//                    else {
+//                        System.out.println("borked");
+//                    }
+//                }
                 
-                for(JRadioButton radioButton : radioButtons) {
-                    if (radioButton.isSelected() ==  true) {
-                        System.out.println("true");
-                    }
-                    else if (radioButton.isSelected() == false) {
-                        System.out.println("false");
-                    }
-                    else {
-                        System.out.println("borked");
-                    }
-                }
-                
-                System.exit(0);
-            }
-        });
+//                System.exit(0);
+//            }
+        //});
+        submit.addActionListener(new ActionListener() { 
+   /////////////////////////////////////////////////////////////////////////////
+  public void actionPerformed(ActionEvent e) { 
+    buttonPressed();
+     /////////////////////////////////////////////////////////////////////////////
+  } 
+} );
+        
     }
     
     public static JComponent setDualColumnFormat(String[] stringLabels, JComponent[] components) {
@@ -188,12 +204,27 @@ public class ExampleGUINo1 extends JFrame {
 //        
 //    }  
     
+    /////////////////////////////////////////////////////////////////////////////
+    private static void buttonPressed() {
+            int popUpAnswer = JOptionPane.showConfirmDialog(null, "Are you sure you want to submit?", "continue?", 0);
+            if (popUpAnswer == JOptionPane.YES_OPTION){
+                //saving code goes here
+            }
+       
+    }
+    //////////////////////////////////////////////////////////////////////////////
+    
     private class ActionComponentHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             
         }
     }
+    
     public static void main(String[] args) {
-        new ExampleGUINo1();           //creates a new instantiation of calculator
+        new BasicGuiWithPopUp();     //creates a new instantiation of calculator
+        
+        
     }
+    
+    
 }
