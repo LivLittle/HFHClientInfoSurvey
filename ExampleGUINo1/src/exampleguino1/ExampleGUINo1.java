@@ -69,8 +69,8 @@ public class ExampleGUINo1 extends JFrame {
         panelContainer.add(new JLabel("Welcome to Restore! Please fill out this form so we can get in contact with you!", SwingConstants.CENTER), BorderLayout.PAGE_START);
         panelContainer.add(labelsAndComps, BorderLayout.CENTER);
 
-        JRadioButton radioButtons[] = new JRadioButton[7];
-        JTextField textFields[] = new JTextField[8];
+        JRadioButton radioButtons[] = new JRadioButton[20];
+        JTextField textFields[] = new JTextField[20];
         
         for (int i=0; i < components.length; i++) {
             if(components[i] instanceof JRadioButton) {
@@ -80,6 +80,12 @@ public class ExampleGUINo1 extends JFrame {
                 textFields[i] = (JTextField)components[i];
             }
         }    
+        
+        for(JTextField textfield : textFields) {
+            if(textfield.getText() == "") {
+//                textfield. = " ";
+            }
+        }
         
         frame.add(panelContainer);
         frame.setSize(1000,430);
@@ -92,7 +98,9 @@ public class ExampleGUINo1 extends JFrame {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
                 for (JTextField textField : textFields) {
-                    System.out.println(textField.getText());
+                    if(textField.getText().equals(""))
+                        System.out.println("No text");
+                    else System.out.println(textField.getText());
                 }
                 
                 for(JRadioButton radioButton : radioButtons) {
@@ -106,7 +114,6 @@ public class ExampleGUINo1 extends JFrame {
                         System.out.println("borked");
                     }
                 }
-                
                 System.exit(0);
             }
         });
