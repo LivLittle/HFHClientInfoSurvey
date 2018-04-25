@@ -69,23 +69,21 @@ public class ExampleGUINo1 extends JFrame {
         panelContainer.add(new JLabel("Welcome to Restore! Please fill out this form so we can get in contact with you!", SwingConstants.CENTER), BorderLayout.PAGE_START);
         panelContainer.add(labelsAndComps, BorderLayout.CENTER);
 
-        JRadioButton radioButtons[] = new JRadioButton[20];
-        JTextField textFields[] = new JTextField[20];
+        JRadioButton radioButtons[] = new JRadioButton[8];
+        JTextField textFields[] = new JTextField[9];
+        int lastRadioElementPosition = -1;
+        int lastTextElementPosition = -1;
         
         for (int i=0; i < components.length; i++) {
             if(components[i] instanceof JRadioButton) {
-                radioButtons[i] = (JRadioButton)components[i];
+                radioButtons[lastRadioElementPosition + 1] = (JRadioButton)components[i];
+                lastRadioElementPosition ++;
             }
             if(components[i] instanceof JTextField) {
-                textFields[i] = (JTextField)components[i];
+                textFields[lastTextElementPosition + 1] = (JTextField)components[i];
+                lastTextElementPosition ++;
             }
         }    
-        
-        for(JTextField textfield : textFields) {
-            if(textfield.getText() == "") {
-//                textfield. = " ";
-            }
-        }
         
         frame.add(panelContainer);
         frame.setSize(1000,430);
@@ -93,30 +91,7 @@ public class ExampleGUINo1 extends JFrame {
         
         actionHandler = new ActionComponentHandler();
                 
-        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        frame.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                for (JTextField textField : textFields) {
-                    if(textField.getText().equals(""))
-                        System.out.println("No text");
-                    else System.out.println(textField.getText());
-                }
-                
-                for(JRadioButton radioButton : radioButtons) {
-                    if (radioButton.isSelected() ==  true) {
-                        System.out.println("true");
-                    }
-                    else if (radioButton.isSelected() == false) {
-                        System.out.println("false");
-                    }
-                    else {
-                        System.out.println("borked");
-                    }
-                }
-                System.exit(0);
-            }
-        });
+        testBasicGUI(frame, textFields, radioButtons);
     }
     
     public static JComponent setDualColumnFormat(String[] stringLabels, JComponent[] components) {
@@ -161,14 +136,31 @@ public class ExampleGUINo1 extends JFrame {
         return panel;
     }
     
-    private static void testBasicGUI() {
-        
-//        for(Component component : components) {
-//            System.out.print(component.getAccessibleContext());
-//        }
-        
-//        System.out.print(component[0]);
-        
+    private static void testBasicGUI(JFrame frame, JTextField[] textFields, JRadioButton[] radioButtons) {
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        frame.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                for (JTextField textField : textFields) {
+                    if(textField.getText().equals(""))
+                        System.out.println("No text");
+                    else System.out.println(textField.getText());
+                }
+                
+                for(JRadioButton radioButton : radioButtons) {
+                    if (radioButton.isSelected() ==  true) {
+                        System.out.println("true");
+                    }
+                    else if (radioButton.isSelected() == false) {
+                        System.out.println("false");
+                    }
+                    else {
+                        System.out.println("borked");
+                    }
+                }
+                System.exit(0);
+            }
+        });
     }
     
 //    private static boolean validateEmail() {
