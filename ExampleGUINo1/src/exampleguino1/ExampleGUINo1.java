@@ -71,19 +71,8 @@ public class ExampleGUINo1 extends JFrame {
 
         JRadioButton radioButtons[] = new JRadioButton[8];
         JTextField textFields[] = new JTextField[9];
-        int lastRadioElementPosition = -1;
-        int lastTextElementPosition = -1;
         
-        for (int i=0; i < components.length; i++) {
-            if(components[i] instanceof JRadioButton) {
-                radioButtons[lastRadioElementPosition + 1] = (JRadioButton)components[i];
-                lastRadioElementPosition ++;
-            }
-            if(components[i] instanceof JTextField) {
-                textFields[lastTextElementPosition + 1] = (JTextField)components[i];
-                lastTextElementPosition ++;
-            }
-        }    
+        parseComponentArray(components, textFields, radioButtons);
         
         frame.add(panelContainer);
         frame.setSize(1000,430);
@@ -134,6 +123,22 @@ public class ExampleGUINo1 extends JFrame {
         }
         
         return panel;
+    }
+    
+    private static void parseComponentArray(JComponent[] components, JTextField[] textFields, JRadioButton[] radioButtons) {
+        int lastRadioElementPosition = -1;
+        int lastTextElementPosition = -1;
+        
+        for (int i=0; i < components.length; i++) {
+            if(components[i] instanceof JRadioButton) {
+                radioButtons[lastRadioElementPosition + 1] = (JRadioButton)components[i];
+                lastRadioElementPosition ++;
+            }
+            if(components[i] instanceof JTextField) {
+                textFields[lastTextElementPosition + 1] = (JTextField)components[i];
+                lastTextElementPosition ++;
+            }
+        }    
     }
     
     private static void testBasicGUI(JFrame frame, JTextField[] textFields, JRadioButton[] radioButtons) {
@@ -192,7 +197,8 @@ public class ExampleGUINo1 extends JFrame {
             
         }
     }
+    
     public static void main(String[] args) {
-        new ExampleGUINo1();           //creates a new instantiation of calculator
+        new ExampleGUINo1();          
     }
 }
