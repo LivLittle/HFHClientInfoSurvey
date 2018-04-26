@@ -29,5 +29,4 @@ public class EditInput {
     public static String editComment(String comment) {
         return "";  //truncates all characters after 1000
     }
-    
 }

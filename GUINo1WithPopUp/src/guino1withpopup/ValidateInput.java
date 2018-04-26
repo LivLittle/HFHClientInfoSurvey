@@ -8,35 +8,35 @@ package guino1withpopup;
 
 public class ValidateInput {
     
-    public static boolean validateName(String name) {
+    public static boolean validateName(String name) {   //outputs: if name is too long, if name has invalid characters
         return name.matches("[A-Z][a-z]+"); //change to hold only 45 characters
     }
     
-    public static boolean validateEmail(String email) {
+    public static boolean validateEmail(String email) {     //outputs: if greater than 45 characters, no @ sign
         return email.matches("");
     }
     
-    public static boolean validatePhoneNum(String phoneNum) {
+    public static boolean validatePhoneNum(String phoneNum) {   //outputs: if more than 9 characters, if there is invalid characters
         return phoneNum.matches("");
     }
     
-    public static boolean validateStreet(String street) {
+    public static boolean validateStreet(String street) {   //outputs: if more than 45 characters, if there is invalid characters
         return street.matches("");
     }
     
-    public static boolean validateCity(String city) {
+    public static boolean validateCity(String city) {   //outputs: if more than 45 characters, if there is invalid characters
         return city.matches("");
     }
     
-    public static boolean validateState(String state) {
+    public static boolean validateState(String state) { //outputs: if more than two character, if two characters are an not a state
         return state.matches("");
     }
     
-    public static boolean validateZip(String zip) {
+    public static boolean validateZip(String zip) { //outputs: if more than max number of characters, if there are characters other than numbers
         return zip.matches("");
     }
     
-    public static boolean validateComment(String comment) {
+    public static boolean validateComment(String comment) { //outputs: if greater than 1000 characters.
         return comment.matches("");
     }
 }

@@ -5,7 +5,6 @@
  */
 package guino1withpopup;
 
-import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -175,30 +174,6 @@ public class GUINo1WithPopUp extends JFrame {
             }
         });
     }
-    
-//    private static boolean validateEmail() {
-//        
-//    }
-//    
-//    private static int editPhoneNum() {
-//        
-//    }
-//    
-//    private static boolean validatePhoneNum() {
-//        
-//    }
-//    
-//    private static boolean validateAddress() {
-//        
-//    }
-//    
-//    private static String editState() {
-//        
-//    }
-//    
-//    private static boolean validateState() {
-//        
-//    }  
     
     private static void buttonPressed() {
         int popUpAnswer = JOptionPane.showConfirmDialog(null, "Are you sure you want to submit?", "continue?", 0);
