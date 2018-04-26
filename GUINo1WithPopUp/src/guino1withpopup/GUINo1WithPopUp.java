@@ -50,7 +50,7 @@ public class GUINo1WithPopUp extends JFrame {
         "I prefer not to give my email address:  ",
         "Street Name:  ",
         "City:  ",
-        "State:  ",
+        "State(two letters only):  ",
         "Zip Code:  ",
         "I prefer not to give my address:  ", 
         "I want email notifications:  ",

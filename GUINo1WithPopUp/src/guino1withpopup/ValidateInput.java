@@ -1,8 +1,8 @@
 /*
  * Harold Pinks, Jorge Pizarro, Frank Cutrera, Olivia Little
  * This file will hold the functions which will check the data in the form,
- * to see if it is valid. There will also be functions to edit the inputed data
- * before it is checked by the validation functions
+ * to see if it is valid. These functions are the last check before info is
+ * inputed into the data base
  */
 package guino1withpopup;
 
