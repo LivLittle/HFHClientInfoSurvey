@@ -7,15 +7,16 @@ package guino1withpopup;
 public class EditInput {
     
     public static String edit(String name) {    //first name, last name, street, and city
-        return "";  //takes all characters that arent letters(45) and some punctuation out of the names
-    }
-    
-    public static String editEmail(String email) {
-        return "";  //truncates all characters after 45 characters
+        name.trim();
+        name.substring(0, 45);
+        return name;  //takes all characters that arent letters(45) and some punctuation
     }
     
     public static String editPhoneNum(String phoneNum) {
-        return "";  //takes out all character which are not numbers(10)
+        phoneNum.trim();
+        phoneNum.substring(0, 10);
+//        phoneNum.
+        return phoneNum; 
     }
     
     public static String editState(String state) {

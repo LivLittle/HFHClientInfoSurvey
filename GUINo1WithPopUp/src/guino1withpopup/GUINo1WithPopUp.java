@@ -81,23 +81,6 @@ public class GUINo1WithPopUp extends JFrame {
         
         parseComponentArray(components, textFields, radioButtons);
         
-        String firstName = textFields[0].getText();
-        String lastName  = textFields[1].getText();
-        String email = textFields[2].getText();
-        String phoneNum = textFields[3].getText();
-        String street = textFields[4].getText();
-        String city = textFields[5].getText();
-        String state = textFields[6].getText();
-        String zip = textFields[7].getText();
-        String comment = textFields[8].getText();
-        
-        if (ValidateInput.validateName(firstName) == true) {
-            System.out.println("true");
-        }
-        else {
-            System.out.println("false");
-        }
-        
         frame.add(panelContainer);
         frame.setSize(1000,430);
         frame.setVisible(true);
@@ -105,6 +88,18 @@ public class GUINo1WithPopUp extends JFrame {
         actionHandler = new ActionComponentHandler();
                 
         testBasicGUI(frame, textFields, radioButtons);
+         
+//        String firstName = textFields[0].getText();                                   ////////////////put phone preference in 
+//        String lastName  = textFields[1].getText();
+//        String email = textFields[2].getText();
+//        String phoneNum = textFields[3].getText();
+//        String street = textFields[4].getText();
+//        String city = textFields[5].getText();
+//        String state = textFields[6].getText();
+//        String zip = textFields[7].getText();
+//        String comment = textFields[8].getText();
+        
+        
     }
     
     public static JComponent setDualColumnFormat(String[] stringLabels, JComponent[] components) {
@@ -187,6 +182,14 @@ public class GUINo1WithPopUp extends JFrame {
                         System.out.println("borked");
                     }
                 }
+                
+                if (ValidateInput.validateState(textFields[6].getText()) == true) {
+                System.out.println("regular expression phone: true");
+                }
+                else {
+                    System.out.println("regular expression phone: false");
+                }
+                
                 System.exit(0);
             }
         });
