@@ -21,47 +21,69 @@ public class GUINo1WithPopUp extends JFrame {
     
     private ActionComponentHandler actionHandler;
     
-    static JComponent[] components = {
-        new JTextField(20),
-        new JTextField(20),
-        new JTextField(20),
-        new JTextField(10),
-        new JRadioButton(),
-        new JTextField(10),
-        new JTextField(20),
-        new JTextField(20),
-        new JTextField(5),
-        new JRadioButton(),
-        new JRadioButton(),
-        new JRadioButton(),
-        new JRadioButton(),
-        new JTextField(20),
-        new JRadioButton(),
-        new JRadioButton(),
-        new JRadioButton()
+    public static String firstName;
+    public static String lastName;
+    public static String email;
+    public static String phoneNum;
+    public static String street;
+    public static String city;
+    public static String stateInitials;
+    public static String zip;
+    public static String comment;
+        
+    public static boolean noEmail;
+    public static boolean noPhoneNum;
+    public static boolean noAddress;
+    public static boolean emailContact;
+    public static boolean textContact;
+    public static boolean volunteer;
+    public static boolean noComment;
+    public static boolean quote;
+    
+    public static JComponent[] components = {
+        new JTextField(20),     //first name
+        new JTextField(20),     //last name
+        new JTextField(20),     //email
+        new JRadioButton(),     //no email
+        new JTextField(8),      //phone num
+        new JRadioButton(),     //no phone num
+        new JTextField(20),     //street
+        new JTextField(20),     //city
+        new JTextField(3),      //state
+        new JTextField(6),      //zip
+        new JRadioButton(),     //no address
+        new JRadioButton(),     //email contact
+        new JRadioButton(),     //text contact
+        new JRadioButton(),     //volunteer
+        new JTextField(20),     //comment
+        new JRadioButton(),     //no comment
+        new JRadioButton()      //quote
     };
     
-    static String[] stringLabels = {
-        "FirstName:  ",
-        "LastName:  ",
-        "Email Address:  ",
-        "Phone Number(no dashes):  ",
-        "I prefer not to give my email address:  ",
-        "Street Name:  ",
-        "City:  ",
-        "State(two letters only):  ",
-        "Zip Code:  ",
-        "I prefer not to give my address:  ", 
-        "I want email notifications:  ",
-        "I want text notifications:  ",
-        "I want to be contacted about volunteer information:  ",
-        "What do you like best about ReStore?  ",
-        "I prefer not to answer:  ",
-        "I allow this discription to be quoted:  ",
-        "I do not allow this discription to be quoted:  ",
+    public static String[] stringLabels = {
+        "FirstName:  ",                                             // 1
+        "LastName:  ",                                              // 2
+        "Email Address:  ",                                         // 3
+        "I prefer not to give my email address:  ",                 // 4
+        "Phone Number(no dashes)  :  ",                             // 5
+        "I prefer not to five my phone number: ",                   // 6
+        "Street Name:  ",                                           // 7
+        "City:  ",                                                  // 8
+        "State(two letters only):  ",                               // 9
+        "Zip Code:  ",                                              // 10
+        "I prefer not to give my address:  ",                       // 11
+        "I want email notifications:  ",                            // 12
+        "I want text notifications:  ",                             // 13 
+        "I want to be contacted about volunteer information:  ",    // 14
+        "What do you like best about ReStore?  ",                   // 15
+        "I prefer not to answer:  ",                                // 16
+        "I allow this discription to be quoted:  ",                 // 17
     };
     
-    public GUINo1WithPopUp() {
+    public GUINo1WithPopUp() {       
+        int textFieldArrNum = 9;
+        int radioButtonArrNum = 8;
+        
         JFrame frame = new JFrame("Restore Client Survery");
         JComponent labelsAndComps = setDualColumnFormat(stringLabels, components);
         JComponent panelContainer = new JPanel(new BorderLayout(5, 5));
@@ -70,36 +92,25 @@ public class GUINo1WithPopUp extends JFrame {
         panelContainer.add(submit, BorderLayout.SOUTH);
         panelContainer.add(labelsAndComps, BorderLayout.CENTER);
         
+        
         submit.addActionListener(new ActionListener() { 
             public void actionPerformed(ActionEvent e) { 
-                buttonPressed();
+//                submit(frame, );
             }
         });
 
-        JRadioButton radioButtons[] = new JRadioButton[8];
-        JTextField textFields[] = new JTextField[9];
+        JTextField textFields[] = new JTextField[textFieldArrNum];
+        JRadioButton radioButtons[] = new JRadioButton[radioButtonArrNum];
         
         parseComponentArray(components, textFields, radioButtons);
         
         frame.add(panelContainer);
-        frame.setSize(1000,430);
+        frame.setSize(1000,450);
         frame.setVisible(true);
         
         actionHandler = new ActionComponentHandler();
                 
         testBasicGUI(frame, textFields, radioButtons);
-         
-//        String firstName = textFields[0].getText();                                   ////////////////put phone preference in 
-//        String lastName  = textFields[1].getText();
-//        String email = textFields[2].getText();
-//        String phoneNum = textFields[3].getText();
-//        String street = textFields[4].getText();
-//        String city = textFields[5].getText();
-//        String state = textFields[6].getText();
-//        String zip = textFields[7].getText();
-//        String comment = textFields[8].getText();
-        
-        
     }
     
     public static JComponent setDualColumnFormat(String[] stringLabels, JComponent[] components) {
@@ -195,16 +206,53 @@ public class GUINo1WithPopUp extends JFrame {
         });
     }
     
-    private static void buttonPressed() {
+    private static void submit(JFrame frame, JTextField[] textFields, JRadioButton[] radioButtons) {
         int popUpAnswer = JOptionPane.showConfirmDialog(null, "Are you sure you want to submit?", "continue?", 0);
         if (popUpAnswer == JOptionPane.YES_OPTION){
-            //saving code goes here
+            validate(frame, textFields, radioButtons);
         }
+    }
+    
+    private static void getInfo(JTextField[] textFields, JRadioButton[] radioButtons) {
+        firstName = textFields[0].getText();                                   
+        lastName  = textFields[1].getText();
+        email = textFields[2].getText();
+        phoneNum = textFields[3].getText();
+        street = textFields[4].getText();
+        city = textFields[5].getText();
+        stateInitials = textFields[6].getText();
+        zip = textFields[7].getText();
+        comment = textFields[8].getText();        
+        
+        noEmail = radioButtons[0].isSelected();
+        noPhoneNum = radioButtons[1].isSelected();
+        noAddress = radioButtons[2].isSelected();
+        emailContact = radioButtons[3].isSelected();
+        textContact = radioButtons[4].isSelected();
+        volunteer = radioButtons[5].isSelected();
+        noComment = radioButtons[6].isSelected();
+        quote = radioButtons[7].isSelected();
+    }
+    
+    private static void edit() {      
+        EditInput.edit(firstName);
+        EditInput.edit(lastName);
+        EditInput.edit(email);
+        EditInput.editPhoneNum(phoneNum);
+        EditInput.edit(street);
+        EditInput.edit(city);
+        EditInput.editState(stateInitials);
+        EditInput.editZip(zip);
+        EditInput.editComment(comment);
+    }
+    
+    private static void validate(JFrame frame, JTextField[] textFields, JRadioButton[] radioButtons) {
+    
     }
     
     private class ActionComponentHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-                buttonPressed();
+//                submit();
         }
     }
     
