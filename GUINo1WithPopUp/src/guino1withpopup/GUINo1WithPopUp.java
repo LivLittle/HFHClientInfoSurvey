@@ -95,7 +95,7 @@ public class GUINo1WithPopUp extends JFrame {
         
         submit.addActionListener(new ActionListener() { 
             public void actionPerformed(ActionEvent e) { 
-//                submit(frame, );
+                submit(frame);
             }
         });
 
@@ -206,10 +206,13 @@ public class GUINo1WithPopUp extends JFrame {
         });
     }
     
-    private static void submit(JFrame frame, JTextField[] textFields, JRadioButton[] radioButtons) {
+    private static void submit(JFrame frame) {
         int popUpAnswer = JOptionPane.showConfirmDialog(null, "Are you sure you want to submit?", "continue?", 0);
         if (popUpAnswer == JOptionPane.YES_OPTION){
-            validate(frame, textFields, radioButtons);
+            for (int counter = 0; counter <= 3; counter++) {
+                validate(frame);
+            }
+            edit();
         }
     }
     
@@ -246,8 +249,39 @@ public class GUINo1WithPopUp extends JFrame {
         EditInput.editComment(comment);
     }
     
-    private static void validate(JFrame frame, JTextField[] textFields, JRadioButton[] radioButtons) {
-    
+    private static void validate(JFrame frame) {
+        String message = "";
+        
+        if(ValidateInput.validate(firstName) == false)
+            message += "First name exceeds character limit.\n";
+        
+        if(ValidateInput.validate(lastName) == false) 
+            message += "Last name exceeds character limit.\n";
+        
+        if(ValidateInput.validateEmail(email) == false && noEmail == false) 
+            message += "Email exceeds character limit or does not contain '@'.\n";
+        
+        if(ValidateInput.validatePhoneNum(phoneNum) == false && noPhoneNum == false) 
+            message += "Phone number exceeds more than 10 digits or contians symbols.\n";
+        
+        if(ValidateInput.validate(city) == false && noAddress == false) 
+            message += "City name exceeds character limit.\n";
+        
+        if(ValidateInput.validate(street) == false && noAddress == false) 
+            message += "Street name exceeds character limit.\n";
+        
+        if(ValidateInput.validateState(stateInitials) == false && noAddress == false) 
+            message += "State exceeds the character limit of 2.\n";
+        
+        if(ValidateInput.validateZip(zip) == false && noAddress == false) 
+            message += "Zip code exceeds more than 5 digits.\n";
+        
+        if(ValidateInput.validateComment(comment) == false && noComment == false) 
+            message += "Your comment on Restore exceeds character limit.\n";
+        
+        if(message != "") {
+            JOptionPane.showMessageDialog(frame, message);
+        }
     }
     
     private class ActionComponentHandler implements ActionListener {
