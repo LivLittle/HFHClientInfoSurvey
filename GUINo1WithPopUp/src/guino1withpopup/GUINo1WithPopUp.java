@@ -13,6 +13,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.imageio.ImageIO;
+import java.io.*;
+import java.awt.image.*;
 import javax.swing.*;
 import java.awt.*;
 
@@ -102,7 +105,7 @@ public class GUINo1WithPopUp extends JFrame {
                     edit();
                     System.exit(0);
                     //send stuff to the database
-                 }
+                }
             }
         });
         
@@ -121,6 +124,9 @@ public class GUINo1WithPopUp extends JFrame {
         panel.setLayout(groupLayout);
         groupLayout.setAutoCreateContainerGaps(true);
         JLabel[] labels = new JLabel[stringLabels.length];
+        
+//        BufferedImage image = ImageIO.read(new File("")); //error
+//        JLabel label = new JLabel(new ImageIcon(image));
         
         for(int i = 0; i < labels.length; i++) {
             labels[i] = new JLabel(stringLabels[i]);
