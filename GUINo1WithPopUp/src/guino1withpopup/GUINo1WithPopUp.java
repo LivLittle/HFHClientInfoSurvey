@@ -18,8 +18,10 @@ import java.awt.*;
 
 
 public class GUINo1WithPopUp extends JFrame {
-    
-    private ActionComponentHandler actionHandler;
+        
+    public static int textFieldArrNum = 9;
+    public static int radioButtonArrNum = 8;
+    public static int counter = 0;
     
     public static String firstName;
     public static String lastName;
@@ -39,6 +41,9 @@ public class GUINo1WithPopUp extends JFrame {
     public static boolean volunteer;
     public static boolean noComment;
     public static boolean quote;
+    
+    public static JTextField textFields[] = new JTextField[textFieldArrNum];
+    public static JRadioButton radioButtons[] = new JRadioButton[radioButtonArrNum];
     
     public static JComponent[] components = {
         new JTextField(20),     //first name
@@ -80,10 +85,7 @@ public class GUINo1WithPopUp extends JFrame {
         "I allow this discription to be quoted:  ",                 // 17
     };
     
-    public GUINo1WithPopUp() {       
-        int textFieldArrNum = 9;
-        int radioButtonArrNum = 8;
-        
+    public GUINo1WithPopUp() {               
         JFrame frame = new JFrame("Restore Client Survery");
         JComponent labelsAndComps = setDualColumnFormat(stringLabels, components);
         JComponent panelContainer = new JPanel(new BorderLayout(5, 5));
@@ -92,24 +94,24 @@ public class GUINo1WithPopUp extends JFrame {
         panelContainer.add(submit, BorderLayout.SOUTH);
         panelContainer.add(labelsAndComps, BorderLayout.CENTER);
         
-        
         submit.addActionListener(new ActionListener() { 
             public void actionPerformed(ActionEvent e) { 
                 submit(frame);
+//                counter++;
+                if(counter > 2) {
+                    edit();
+                    System.exit(0);
+                    //send stuff to the database
+                 }
             }
         });
-
-        JTextField textFields[] = new JTextField[textFieldArrNum];
-        JRadioButton radioButtons[] = new JRadioButton[radioButtonArrNum];
         
         parseComponentArray(components, textFields, radioButtons);
         
         frame.add(panelContainer);
         frame.setSize(1000,450);
         frame.setVisible(true);
-        
-        actionHandler = new ActionComponentHandler();
-                
+                        
         testBasicGUI(frame, textFields, radioButtons);
     }
     
@@ -151,7 +153,6 @@ public class GUINo1WithPopUp extends JFrame {
                     .addComponent(labels[i])
                     .addComponent(components[i], preferredSize, preferredSize, preferredSize));
         }
-        
         return panel;
     }
     
@@ -207,12 +208,10 @@ public class GUINo1WithPopUp extends JFrame {
     }
     
     private static void submit(JFrame frame) {
-        int popUpAnswer = JOptionPane.showConfirmDialog(null, "Are you sure you want to submit?", "continue?", 0);
+        int popUpAnswer = JOptionPane.showConfirmDialog(null, "Are you sure you want to submit?", "Continue?", 0);
         if (popUpAnswer == JOptionPane.YES_OPTION){
-            for (int counter = 0; counter <= 3; counter++) {
-                validate(frame);
-            }
-            edit();
+            getInfo(textFields, radioButtons);
+            validate(frame);
         }
     }
     
@@ -281,12 +280,7 @@ public class GUINo1WithPopUp extends JFrame {
         
         if(message != "") {
             JOptionPane.showMessageDialog(frame, message);
-        }
-    }
-    
-    private class ActionComponentHandler implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-//                submit();
+            counter++;
         }
     }
     
