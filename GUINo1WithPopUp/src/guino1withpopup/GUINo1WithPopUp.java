@@ -97,7 +97,7 @@ public class GUINo1WithPopUp extends JFrame {
         submit.addActionListener(new ActionListener() { 
             public void actionPerformed(ActionEvent e) { 
                 submit(frame);
-//                counter++;
+                
                 if(counter > 2) {
                     edit();
                     System.exit(0);
@@ -280,8 +280,9 @@ public class GUINo1WithPopUp extends JFrame {
         
         if(message != "") {
             JOptionPane.showMessageDialog(frame, message);
-            counter++;
         }
+        
+        counter++;
     }
     
     public static void main(String[] args) {
