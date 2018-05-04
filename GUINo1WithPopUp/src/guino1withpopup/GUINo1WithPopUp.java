@@ -21,7 +21,8 @@ import java.awt.*;
 
 
 public class GUINo1WithPopUp extends JFrame {
-        
+    private static BufferedImage image;    
+    
     public static int textFieldArrNum = 9;
     public static int radioButtonArrNum = 8;
     public static int counter = 0;
@@ -125,8 +126,13 @@ public class GUINo1WithPopUp extends JFrame {
         groupLayout.setAutoCreateContainerGaps(true);
         JLabel[] labels = new JLabel[stringLabels.length];
         
-//        BufferedImage image = ImageIO.read(new File("")); //error
-//        JLabel label = new JLabel(new ImageIcon(image));
+        try{
+            image = ImageIO.read(new File("C:\\Users\\olittle867\\Documents\\GitHub\\HFHClientInfoSurvey\\GUINo1WithPopUp\\Color ReStore Logo.jpg")); 
+        }
+        catch(IOException ex) {
+            System.out.println("Logo file not found");
+        }
+        JLabel imageLabel = new JLabel(new ImageIcon(image));
         
         for(int i = 0; i < labels.length; i++) {
             labels[i] = new JLabel(stringLabels[i]);
@@ -159,6 +165,9 @@ public class GUINo1WithPopUp extends JFrame {
                     .addComponent(labels[i])
                     .addComponent(components[i], preferredSize, preferredSize, preferredSize));
         }
+        
+        panel.add(imageLabel);
+        
         return panel;
     }
     
