@@ -131,17 +131,17 @@ public class GUINo1WithPopUp extends JFrame {
         groupLayout.setAutoCreateContainerGaps(true);
         JLabel[] labels = new JLabel[stringLabels.length];
         
-        try{
-            image = ImageIO.read(new File("C:\\Users\\olittle867\\Documents\\GitHub\\HFHClientInfoSurvey\\GUINo1WithPopUp\\Color ReStore Logo.jpg")); 
-        }
-        catch(IOException ex) {
-            System.out.println("Logo file not found");
-        }
-        JLabel imageLabel = new JLabel(new ImageIcon(image));
-        
-        for(int i = 0; i < labels.length; i++) {
-            labels[i] = new JLabel(stringLabels[i]);
-        }
+//        try{
+//            image = ImageIO.read(new File("C:\\Users\\olittle867\\Documents\\GitHub\\HFHClientInfoSurvey\\GUINo1WithPopUp\\Color ReStore Logo.jpg")); 
+//        }
+//        catch(IOException ex) {
+//            System.out.println("Logo file not found");
+//        }
+//        JLabel imageLabel = new JLabel(new ImageIcon(image));
+//        
+//        for(int i = 0; i < labels.length; i++) {
+//            labels[i] = new JLabel(stringLabels[i]);
+//        }
         
         GroupLayout.SequentialGroup row = groupLayout.createSequentialGroup();
         GroupLayout.Group labelColumn = groupLayout.createParallelGroup(GroupLayout.Alignment.TRAILING);
@@ -171,7 +171,7 @@ public class GUINo1WithPopUp extends JFrame {
                     .addComponent(components[i], preferredSize, preferredSize, preferredSize));
         }
         
-        panel.add(imageLabel);
+//        panel.add(imageLabel);
         
         return panel;
     }
