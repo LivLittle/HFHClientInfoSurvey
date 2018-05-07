@@ -104,6 +104,7 @@ public class GUINo1WithPopUp extends JFrame {
                 
                 if(counter > 2) {
                     edit();
+                    
                     System.exit(0);
                     //send stuff to the database
                 }
@@ -117,6 +118,10 @@ public class GUINo1WithPopUp extends JFrame {
         frame.setVisible(true);
                         
         testBasicGUI(frame, textFields, radioButtons);
+    }
+    
+    public static void setData() {
+       
     }
     
     public static JComponent setDualColumnFormat(String[] stringLabels, JComponent[] components) {
