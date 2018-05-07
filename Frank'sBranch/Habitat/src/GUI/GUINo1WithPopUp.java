@@ -3,7 +3,7 @@
  * This file is an example of how the GUI for the Habitat for humanity form will look.
  * This file will not yet connect to the actual database
  */
-package guino1withpopup;
+package gui;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -18,6 +18,9 @@ import java.io.*;
 import java.awt.image.*;
 import javax.swing.*;
 import java.awt.*;
+
+
+import habitat.Info;
 
 
 public class GUINo1WithPopUp extends JFrame {
@@ -99,12 +102,13 @@ public class GUINo1WithPopUp extends JFrame {
         panelContainer.add(labelsAndComps, BorderLayout.CENTER);
         
         submit.addActionListener(new ActionListener() { 
+         
             public void actionPerformed(ActionEvent e) { 
                 submit(frame);
                 
                 if(counter > 2) {
                     edit();
-                    
+                    setData();
                     System.exit(0);
                     //send stuff to the database
                 }
@@ -120,8 +124,26 @@ public class GUINo1WithPopUp extends JFrame {
         testBasicGUI(frame, textFields, radioButtons);
     }
     
-    public static void setData() {
-       
+    public static void setData(){
+        Info info = new Info();
+       info.setFirstName(firstName);
+       info.setLastName(lastName);
+       info.setEmail(email);
+       info.setPhoneNum(phoneNum);
+       info.setStreet(street);
+       info.setCity(city);
+       info.setState(stateInitials);
+       info.setZip(Integer.parseInt(zip));
+       info.setComment(comment);
+       info.setNoEmail(noEmail);
+       info.setNoPhoneNum(noPhoneNum);
+       info.setNoAddress(noAddress);
+       info.setEmailContact(emailContact);
+       info.setTextContact(textContact);
+       info.setVolunteer(volunteer);
+       info.setNoComment(noComment);
+       info.setQuote(quote);
+           
     }
     
     public static JComponent setDualColumnFormat(String[] stringLabels, JComponent[] components) {
@@ -131,17 +153,17 @@ public class GUINo1WithPopUp extends JFrame {
         groupLayout.setAutoCreateContainerGaps(true);
         JLabel[] labels = new JLabel[stringLabels.length];
         
-        try{
-            image = ImageIO.read(new File("C:\\Users\\olittle867\\Documents\\GitHub\\HFHClientInfoSurvey\\GUINo1WithPopUp\\Color ReStore Logo.jpg")); 
-        }
-        catch(IOException ex) {
-            System.out.println("Logo file not found");
-        }
-        JLabel imageLabel = new JLabel(new ImageIcon(image));
-        
-        for(int i = 0; i < labels.length; i++) {
-            labels[i] = new JLabel(stringLabels[i]);
-        }
+//        try{
+//            image = ImageIO.read(new File("C:\\Users\\olittle867\\Documents\\GitHub\\HFHClientInfoSurvey\\GUINo1WithPopUp\\Color ReStore Logo.jpg")); 
+//        }
+//        catch(IOException ex) {
+//            System.out.println("Logo file not found");
+//        }
+//        JLabel imageLabel = new JLabel(new ImageIcon(image));
+//        
+//        for(int i = 0; i < labels.length; i++) {
+//            labels[i] = new JLabel(stringLabels[i]);
+//        }
         
         GroupLayout.SequentialGroup row = groupLayout.createSequentialGroup();
         GroupLayout.Group labelColumn = groupLayout.createParallelGroup(GroupLayout.Alignment.TRAILING);
@@ -171,7 +193,7 @@ public class GUINo1WithPopUp extends JFrame {
                     .addComponent(components[i], preferredSize, preferredSize, preferredSize));
         }
         
-        panel.add(imageLabel);
+        //panel.add(imageLabel);
         
         return panel;
     }
@@ -305,7 +327,29 @@ public class GUINo1WithPopUp extends JFrame {
         counter++;
     }
     
+  //  public static void writeExcel() throws IOException, WriteException {
+    //    try {
+      //      String filename = "C://desktop/file.xls";
+        //    WritableWorkbook workbook = Workbook.createWorkbook(new File(filename));
+          //  WritableSheet sheet = workbook.createSheet("Sheet1", 0);
+            
+            //adding a label
+            //jxl.write.Label label = new jxl.write.Label(0,0,"A label record");
+            //sheet.addCell(label);
+            //jxl.write.Label label2 = new jxl.write.Label(0,1,"%s", firstName);
+            //Number number = new Number(0,1,3.1415);
+            //sheet.addCell(number);
+         
+            //workbook.write();
+            //workbook.close();
+        //} catch (WriteException e){
+            
+        //}
+    //}
+   
+    
     public static void main(String[] args) {
-        new GUINo1WithPopUp();          
+        new GUINo1WithPopUp();  
+      
     }
 }

@@ -2,7 +2,7 @@
  * Harold Pinks, Jorge Pizarro, Frank Cutrera, Olivia Little
  * This file will edit some of the user inputs for extraneous 
  */
-package guino1withpopup;
+package gui;
 
 public class EditInput {
     

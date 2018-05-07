@@ -4,7 +4,7 @@
  * to see if it is valid. These functions are the last check before info is
  * inputed into the data base
  */
-package guino1withpopup;
+package gui;
 
 public class ValidateInput {
     
