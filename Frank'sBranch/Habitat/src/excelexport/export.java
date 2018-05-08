@@ -17,7 +17,7 @@ public class export {
      public static void writeExcel() {
          try {
             //create .xls and create a worksheet.
-            FileOutputStream fos = new FileOutputStream("C:\\Users\\fcutrera592\\Desktop");
+            FileOutputStream fos = new FileOutputStream("C:\\Users\\fcutrera592\\Desktop\\test.xls");
             HSSFWorkbook workbook = new HSSFWorkbook();
             HSSFSheet worksheet = workbook.createSheet("My Worksheet");
 
@@ -26,7 +26,7 @@ public class export {
 
             //Create COL-A from ROW-1 and set data
             HSSFCell cellA1 = row1.createCell((short) 0);
-            cellA1.setCellValue("Sno");
+            cellA1.setCellValue("sno");
             HSSFCellStyle cellStyle = workbook.createCellStyle();
             cellStyle.setFillForegroundColor(HSSFColor.GOLD.index);
             cellStyle.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);

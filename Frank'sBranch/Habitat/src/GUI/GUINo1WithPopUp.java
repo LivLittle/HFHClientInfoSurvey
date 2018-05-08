@@ -371,12 +371,12 @@ public class GUINo1WithPopUp extends JFrame {
             }
         } );
         
-       // exportData.addActionListener(new ActionListener() {
+        exportData.addActionListener(new ActionListener() {
             
-           // public void actionPerformed(ActionEvent e) {
-            //    excelexport.export.writeExcel();
-        //    }
-        //});
+            public void actionPerformed(ActionEvent e) {
+                excelexport.export.writeExcel();
+            }
+        });
         
         
         
