@@ -18,6 +18,7 @@ import java.io.*;
 import java.awt.image.*;
 import javax.swing.*;
 import java.awt.*;
+import excelexport.*;
 
 
 import habitat.Info;
@@ -98,6 +99,7 @@ public class GUINo1WithPopUp extends JFrame {
         JComponent panelContainer = new JPanel(new BorderLayout(5, 5));
         panelContainer.add(new JLabel("Welcome to Restore! Please fill out this form so we can get in contact with you!", SwingConstants.CENTER), BorderLayout.PAGE_START);
         JButton submit = new JButton("Submit");
+        
         panelContainer.add(submit, BorderLayout.SOUTH);
         panelContainer.add(labelsAndComps, BorderLayout.CENTER);
         
@@ -245,6 +247,7 @@ public class GUINo1WithPopUp extends JFrame {
                 }
                 
                 System.exit(0);
+                
             }
         });
     }
@@ -347,9 +350,40 @@ public class GUINo1WithPopUp extends JFrame {
         //}
     //}
    
-    
+    public static void menu() {
+        JFrame menu = new JFrame("Menu");
+        JComponent gridContainer = new JPanel(new GridLayout(2, 1));
+        JButton newClient = new JButton("New Client");
+        JButton exportData = new JButton("Export Data");
+        
+        gridContainer.add(newClient);
+        gridContainer.add(exportData);
+        
+        menu.add(gridContainer);
+        menu.setVisible(true);
+        menu.setSize(300,300);
+        menu.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        
+        newClient.addActionListener(new ActionListener() {
+            
+            public void actionPerformed(ActionEvent e) { 
+                new GUINo1WithPopUp();
+            }
+        } );
+        
+       // exportData.addActionListener(new ActionListener() {
+            
+           // public void actionPerformed(ActionEvent e) {
+            //    excelexport.export.writeExcel();
+        //    }
+        //});
+        
+        
+        
+        
+    }
     public static void main(String[] args) {
-        new GUINo1WithPopUp();  
-      
+        menu();
+        
     }
 }
