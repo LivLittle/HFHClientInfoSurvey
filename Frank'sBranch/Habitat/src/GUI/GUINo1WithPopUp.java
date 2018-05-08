@@ -24,7 +24,7 @@ import habitat.Info;
 
 
 public class GUINo1WithPopUp extends JFrame {
-    private static BufferedImage image;    
+    private static BufferedImage img;    
     
     public static int textFieldArrNum = 9;
     public static int radioButtonArrNum = 8;
@@ -101,6 +101,23 @@ public class GUINo1WithPopUp extends JFrame {
         panelContainer.add(submit, BorderLayout.SOUTH);
         panelContainer.add(labelsAndComps, BorderLayout.CENTER);
         
+        File restoreLogo = new File("C:\\Users\\olittle867\\Documents\\GitHub\\HFHClientInfoSurvey\\Frank'sBranch\\Habitat\\src\\GUI\\RestoreLogo2.png");
+        
+        try{
+            img = ImageIO.read(restoreLogo);
+        }
+        catch(IOException e) {
+            System.out.println("borked");
+        }
+        
+        int w = img.getWidth(null);
+        int h = img.getHeight(null);
+        BufferedImage bi = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+        Graphics g = bi.getGraphics();
+        super.paintComponents(g);
+        g.drawImage(img, 0, 0, null);
+        
+        
         submit.addActionListener(new ActionListener() { 
          
             public void actionPerformed(ActionEvent e) { 
@@ -118,7 +135,7 @@ public class GUINo1WithPopUp extends JFrame {
         parseComponentArray(components, textFields, radioButtons);
         
         frame.add(panelContainer);
-        frame.setSize(1000,450);
+        frame.setSize(1900,1000);
         frame.setVisible(true);
                         
         testBasicGUI(frame, textFields, radioButtons);
@@ -146,20 +163,35 @@ public class GUINo1WithPopUp extends JFrame {
            
     }
     
-    public static JComponent setDualColumnFormat(String[] stringLabels, JComponent[] components) {
+    public JComponent setDualColumnFormat(String[] stringLabels, JComponent[] components) {
         JComponent panel = new JPanel();
         GroupLayout groupLayout = new GroupLayout(panel);
         panel.setLayout(groupLayout);
         groupLayout.setAutoCreateContainerGaps(true);
         JLabel[] labels = new JLabel[stringLabels.length];
         
-//        try{
-//            image = ImageIO.read(new File("C:\\Users\\olittle867\\Documents\\GitHub\\HFHClientInfoSurvey\\GUINo1WithPopUp\\Color ReStore Logo.jpg")); 
-//        }
-//        catch(IOException ex) {
-//            System.out.println("Logo file not found");
-//        }
-//        JLabel imageLabel = new JLabel(new ImageIcon(image));
+//        ImageIcon imageIcon = new ImageIcon(getClass().getResource("RestoreLogo2.png"));
+//        Image image = imageIcon.getImage();  
+//        Image scaledImage = image.getScaledInstance(100, 50, Image.SCALE_SMOOTH);
+//        imageIcon = new ImageIcon(scaledImage);
+//        JLabel imageLabel = new JLabel("blah", imageIcon, SwingConstants);
+        
+        File restoreLogo = new File("C:\\Users\\olittle867\\Documents\\GitHub\\HFHClientInfoSurvey\\Frank'sBranch\\Habitat\\src\\GUI\\RestoreLogo2.png");
+        
+        try{
+            img = ImageIO.read(restoreLogo);
+        }
+        catch(IOException e) {
+            System.out.println("borked");
+        }
+        
+        int w = img.getWidth(null);
+        int h = img.getHeight(null);
+        BufferedImage bi = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+        Graphics g = bi.getGraphics();
+        g.drawImage(img, 0, 0, null);
+        
+        
         
         for(int i = 0; i < labels.length; i++) {
             labels[i] = new JLabel(stringLabels[i]);
@@ -193,7 +225,7 @@ public class GUINo1WithPopUp extends JFrame {
                     .addComponent(components[i], preferredSize, preferredSize, preferredSize));
         }
         
-        //panel.add(imageLabel);
+//        panel.add(imageLabel);
         
         return panel;
     }
