@@ -160,10 +160,10 @@ public class GUINo1WithPopUp extends JFrame {
 //            System.out.println("Logo file not found");
 //        }
 //        JLabel imageLabel = new JLabel(new ImageIcon(image));
-//        
-//        for(int i = 0; i < labels.length; i++) {
-//            labels[i] = new JLabel(stringLabels[i]);
-//        }
+        
+        for(int i = 0; i < labels.length; i++) {
+            labels[i] = new JLabel(stringLabels[i]);
+        }
         
         GroupLayout.SequentialGroup row = groupLayout.createSequentialGroup();
         GroupLayout.Group labelColumn = groupLayout.createParallelGroup(GroupLayout.Alignment.TRAILING);
