@@ -97,12 +97,11 @@ public class GUINo1WithPopUp extends JFrame {
         JFrame frame = new JFrame("Restore Client Survery");
         JComponent labelsAndComps = setDualColumnFormat(stringLabels, components);
         JComponent panelContainer = new JPanel(new BorderLayout(5, 5));
-//        panelContainer.add(new JLabel("Welcome to Restore! Please fill out this form so we can get in contact with you!", SwingConstants.CENTER), BorderLayout.PAGE_START);
         JButton submit = new JButton("Submit");
         
         ImageIcon imageIcon = new ImageIcon(getClass().getResource("RestoreLogo2.png"));
         Image image = imageIcon.getImage();  
-        Image scaledImage = image.getScaledInstance(300, 100, Image.SCALE_SMOOTH);
+        Image scaledImage = image.getScaledInstance(500, 140, Image.SCALE_SMOOTH);
         imageIcon = new ImageIcon(scaledImage);
         JLabel imageLabel = new JLabel("", imageIcon, SwingConstants.CENTER);
         
@@ -133,17 +132,6 @@ public class GUINo1WithPopUp extends JFrame {
         testBasicGUI(frame, textFields, radioButtons);
     }
     
-    public static void setUIFont(javax.swing.plaf.FontUIResource f){
-        java.util.Enumeration keys = UIManager.getDefaults().keys();
-        while (keys.hasMoreElements()) {
-            Object key = keys.nextElement();
-            Object value = UIManager.get (key);
-            if (value instanceof javax.swing.plaf.FontUIResource) {
-                UIManager.put (key, f);
-            }
-        }
-    } 
-    
     public static void setData(){
         Info info = new Info();
        info.setFirstName(firstName);
@@ -171,6 +159,7 @@ public class GUINo1WithPopUp extends JFrame {
         panel.setLayout(groupLayout);
         groupLayout.setAutoCreateContainerGaps(true);
         JLabel[] labels = new JLabel[stringLabels.length];
+        Font font = new Font("Serif", Font.PLAIN, 20);
 
         for(int i = 0; i < labels.length; i++) {
             labels[i] = new JLabel(stringLabels[i]);
@@ -192,10 +181,12 @@ public class GUINo1WithPopUp extends JFrame {
         
         for(JLabel label : labels) {
             labelColumn.addComponent(label);
+            label.setFont(font);
         }
         
         for(Component component : components) {
             componentColumn.addComponent(component, preferredSize, preferredSize, preferredSize);
+            component.setFont(font);
         }
         
         for(int i = 0; i < labels.length; i++) {
@@ -203,9 +194,7 @@ public class GUINo1WithPopUp extends JFrame {
                     .addComponent(labels[i])
                     .addComponent(components[i], preferredSize, preferredSize, preferredSize));
         }
-        
-//        panel.add(imageLabel);
-        
+                
         return panel;
     }
     
