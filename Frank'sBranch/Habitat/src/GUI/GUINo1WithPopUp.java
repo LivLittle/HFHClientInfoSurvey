@@ -79,8 +79,8 @@ public class GUINo1WithPopUp extends JFrame {
         "Email Address:  ",                                         // 3
         "I prefer not to give my email address:  ",                 // 4
         "Phone Number(no dashes)  :  ",                             // 5
-        "I prefer not to five my phone number: ",                   // 6
-        "Street Name:  ",                                           // 7
+        "I prefer not to give my phone number: ",                   // 6
+        "Street Address:  ",                                        // 7
         "City:  ",                                                  // 8
         "State(two letters only):  ",                               // 9
         "Zip Code:  ",                                              // 10
@@ -97,17 +97,18 @@ public class GUINo1WithPopUp extends JFrame {
         JFrame frame = new JFrame("Restore Client Survery");
         JComponent labelsAndComps = setDualColumnFormat(stringLabels, components);
         JComponent panelContainer = new JPanel(new BorderLayout(5, 5));
-        panelContainer.add(new JLabel("Welcome to Restore! Please fill out this form so we can get in contact with you!", SwingConstants.CENTER), BorderLayout.PAGE_START);
+//        panelContainer.add(new JLabel("Welcome to Restore! Please fill out this form so we can get in contact with you!", SwingConstants.CENTER), BorderLayout.PAGE_START);
         JButton submit = new JButton("Submit");
-        
-        panelContainer.add(submit, BorderLayout.SOUTH);
-        panelContainer.add(labelsAndComps, BorderLayout.CENTER);
         
         ImageIcon imageIcon = new ImageIcon(getClass().getResource("RestoreLogo2.png"));
         Image image = imageIcon.getImage();  
-        Image scaledImage = image.getScaledInstance(100, 50, Image.SCALE_SMOOTH);
+        Image scaledImage = image.getScaledInstance(300, 100, Image.SCALE_SMOOTH);
         imageIcon = new ImageIcon(scaledImage);
-        JLabel imageLabel = new JLabel("blah", imageIcon, SwingConstants.CENTER);
+        JLabel imageLabel = new JLabel("", imageIcon, SwingConstants.CENTER);
+        
+        panelContainer.add(imageLabel, BorderLayout.PAGE_START);
+        panelContainer.add(submit, BorderLayout.SOUTH);
+        panelContainer.add(labelsAndComps, BorderLayout.CENTER);
         
         submit.addActionListener(new ActionListener() { 
          
@@ -125,12 +126,23 @@ public class GUINo1WithPopUp extends JFrame {
         
         parseComponentArray(components, textFields, radioButtons);
         frame.add(panelContainer);
-        frame.setSize(1900,1000);
+        frame.setSize(600, 540);
+        frame.setResizable(false);
         frame.setVisible(true);
-        frame.add(imageLabel);
-                        
+        frame.pack();                        
         testBasicGUI(frame, textFields, radioButtons);
     }
+    
+    public static void setUIFont(javax.swing.plaf.FontUIResource f){
+        java.util.Enumeration keys = UIManager.getDefaults().keys();
+        while (keys.hasMoreElements()) {
+            Object key = keys.nextElement();
+            Object value = UIManager.get (key);
+            if (value instanceof javax.swing.plaf.FontUIResource) {
+                UIManager.put (key, f);
+            }
+        }
+    } 
     
     public static void setData(){
         Info info = new Info();
@@ -151,7 +163,6 @@ public class GUINo1WithPopUp extends JFrame {
        info.setVolunteer(volunteer);
        info.setNoComment(noComment);
        info.setQuote(quote);
-           
     }
     
     public JComponent setDualColumnFormat(String[] stringLabels, JComponent[] components) {
@@ -160,25 +171,7 @@ public class GUINo1WithPopUp extends JFrame {
         panel.setLayout(groupLayout);
         groupLayout.setAutoCreateContainerGaps(true);
         JLabel[] labels = new JLabel[stringLabels.length];
-        
-        
-//        File restoreLogo = new File("C:\\Users\\olittle867\\Documents\\GitHub\\HFHClientInfoSurvey\\Frank'sBranch\\Habitat\\src\\GUI\\RestoreLogo2.png");
-//        
-//        try{
-//            img = ImageIO.read(restoreLogo);
-//        }
-//        catch(IOException e) {
-//            System.out.println("borked");
-//        }
-//        
-//        int w = img.getWidth(null);
-//        int h = img.getHeight(null);
-//        BufferedImage bi = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-//        Graphics g = bi.getGraphics();
-//        g.drawImage(img, 0, 0, null);
-        
-        
-        
+
         for(int i = 0; i < labels.length; i++) {
             labels[i] = new JLabel(stringLabels[i]);
         }
@@ -387,17 +380,14 @@ public class GUINo1WithPopUp extends JFrame {
             }
         } );
         
-        exportData.addActionListener(new ActionListener() {
-            
-            public void actionPerformed(ActionEvent e) {
-                excelexport.export.writeExcel();
-            }
-        });
-        
-        
-        
-        
+//        exportData.addActionListener(new ActionListener() {
+//            
+//            public void actionPerformed(ActionEvent e) {
+//                excelexport.export.writeExcel();
+//            }
+//        });   
     }
+    
     public static void main(String[] args) {
         menu();
         
