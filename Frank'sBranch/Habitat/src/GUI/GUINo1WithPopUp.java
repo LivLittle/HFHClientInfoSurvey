@@ -117,6 +117,7 @@ public class GUINo1WithPopUp extends JFrame {
                 if(counter > 2) {
                     edit();
                     setData();
+                    
                     System.exit(0);
                     //send stuff to the database
                 }
@@ -346,6 +347,12 @@ public class GUINo1WithPopUp extends JFrame {
         counter++;
     }
     
+    public static void createDirectory() {
+       
+        File directory = new File("C:\\HabitatSurvey\\");
+            directory.mkdir();
+    }
+    
   //  public static void writeExcel() throws IOException, WriteException {
     //    try {
       //      String filename = "C://desktop/file.xls";
@@ -393,13 +400,11 @@ public class GUINo1WithPopUp extends JFrame {
                 excelexport.export.writeExcel();
             }
         });
-        
-        
-        
-        
     }
+        
+        
     public static void main(String[] args) {
         menu();
-        
+        createDirectory();
     }
 }
