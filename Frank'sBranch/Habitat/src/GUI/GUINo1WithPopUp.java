@@ -103,22 +103,11 @@ public class GUINo1WithPopUp extends JFrame {
         panelContainer.add(submit, BorderLayout.SOUTH);
         panelContainer.add(labelsAndComps, BorderLayout.CENTER);
         
-        File restoreLogo = new File("C:\\Users\\olittle867\\Documents\\GitHub\\HFHClientInfoSurvey\\Frank'sBranch\\Habitat\\src\\GUI\\RestoreLogo2.png");
-        
-        try{
-            img = ImageIO.read(restoreLogo);
-        }
-        catch(IOException e) {
-            System.out.println("borked");
-        }
-        
-        int w = img.getWidth(null);
-        int h = img.getHeight(null);
-        BufferedImage bi = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-        Graphics g = bi.getGraphics();
-        super.paintComponents(g);
-        g.drawImage(img, 0, 0, null);
-        
+        ImageIcon imageIcon = new ImageIcon(getClass().getResource("RestoreLogo2.png"));
+        Image image = imageIcon.getImage();  
+        Image scaledImage = image.getScaledInstance(100, 50, Image.SCALE_SMOOTH);
+        imageIcon = new ImageIcon(scaledImage);
+        JLabel imageLabel = new JLabel("blah", imageIcon, SwingConstants.CENTER);
         
         submit.addActionListener(new ActionListener() { 
          
@@ -135,10 +124,10 @@ public class GUINo1WithPopUp extends JFrame {
         });
         
         parseComponentArray(components, textFields, radioButtons);
-        
         frame.add(panelContainer);
         frame.setSize(1900,1000);
         frame.setVisible(true);
+        frame.add(imageLabel);
                         
         testBasicGUI(frame, textFields, radioButtons);
     }
@@ -172,26 +161,21 @@ public class GUINo1WithPopUp extends JFrame {
         groupLayout.setAutoCreateContainerGaps(true);
         JLabel[] labels = new JLabel[stringLabels.length];
         
-//        ImageIcon imageIcon = new ImageIcon(getClass().getResource("RestoreLogo2.png"));
-//        Image image = imageIcon.getImage();  
-//        Image scaledImage = image.getScaledInstance(100, 50, Image.SCALE_SMOOTH);
-//        imageIcon = new ImageIcon(scaledImage);
-//        JLabel imageLabel = new JLabel("blah", imageIcon, SwingConstants);
         
-        File restoreLogo = new File("C:\\Users\\olittle867\\Documents\\GitHub\\HFHClientInfoSurvey\\Frank'sBranch\\Habitat\\src\\GUI\\RestoreLogo2.png");
-        
-        try{
-            img = ImageIO.read(restoreLogo);
-        }
-        catch(IOException e) {
-            System.out.println("borked");
-        }
-        
-        int w = img.getWidth(null);
-        int h = img.getHeight(null);
-        BufferedImage bi = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-        Graphics g = bi.getGraphics();
-        g.drawImage(img, 0, 0, null);
+//        File restoreLogo = new File("C:\\Users\\olittle867\\Documents\\GitHub\\HFHClientInfoSurvey\\Frank'sBranch\\Habitat\\src\\GUI\\RestoreLogo2.png");
+//        
+//        try{
+//            img = ImageIO.read(restoreLogo);
+//        }
+//        catch(IOException e) {
+//            System.out.println("borked");
+//        }
+//        
+//        int w = img.getWidth(null);
+//        int h = img.getHeight(null);
+//        BufferedImage bi = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+//        Graphics g = bi.getGraphics();
+//        g.drawImage(img, 0, 0, null);
         
         
         
