@@ -375,18 +375,6 @@ public class GUINo1WithPopUp extends JFrame {
                 new GUINo1WithPopUp();
             }
         } );
-        
-<<<<<<< HEAD
-        exportData.addActionListener(new ActionListener() {
-            
-            public void actionPerformed(ActionEvent e) {
-                excelexport.export.writeExcel();
-            }
-        });
-    }
-        
-        
-=======
 //        exportData.addActionListener(new ActionListener() {
 //            
 //            public void actionPerformed(ActionEvent e) {
@@ -395,7 +383,6 @@ public class GUINo1WithPopUp extends JFrame {
 //        });   
     }
     
->>>>>>> 3f049f7b41df18cd6103927897af938437b16314
     public static void main(String[] args) {
         menu();
         createDirectory();
