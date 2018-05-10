@@ -334,26 +334,6 @@ public class GUINo1WithPopUp extends JFrame {
         File directory = new File("C:\\HabitatSurvey\\");
             directory.mkdir();
     }
-    
-  //  public static void writeExcel() throws IOException, WriteException {
-    //    try {
-      //      String filename = "C://desktop/file.xls";
-        //    WritableWorkbook workbook = Workbook.createWorkbook(new File(filename));
-          //  WritableSheet sheet = workbook.createSheet("Sheet1", 0);
-            
-            //adding a label
-            //jxl.write.Label label = new jxl.write.Label(0,0,"A label record");
-            //sheet.addCell(label);
-            //jxl.write.Label label2 = new jxl.write.Label(0,1,"%s", firstName);
-            //Number number = new Number(0,1,3.1415);
-            //sheet.addCell(number);
-         
-            //workbook.write();
-            //workbook.close();
-        //} catch (WriteException e){
-            
-        //}
-    //}
    
     public static void menu() {
         JFrame menu = new JFrame("Menu");
@@ -375,12 +355,12 @@ public class GUINo1WithPopUp extends JFrame {
                 new GUINo1WithPopUp();
             }
         } );
-//        exportData.addActionListener(new ActionListener() {
-//            
-//            public void actionPerformed(ActionEvent e) {
-//                excelexport.export.writeExcel();
-//            }
-//        });   
+        exportData.addActionListener(new ActionListener() {
+            
+            public void actionPerformed(ActionEvent e) {
+                excelexport.export.writeExcel();
+            }
+        });   
     }
     
     public static void main(String[] args) {
