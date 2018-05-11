@@ -19,23 +19,9 @@ import java.awt.image.*;
 import javax.swing.*;
 import java.awt.*;
 import excelexport.*;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
 
 
 import habitat.Info;
-import javax.persistence.EntityTransaction;
 
 
 public class GUINo1WithPopUp extends JFrame {
@@ -391,32 +377,6 @@ public class GUINo1WithPopUp extends JFrame {
 //        });   
     }
     
-      private void insertButtonActionPerformed(ActionEvent evt) 
-   {
-      Info info = new Info();
-      info.setFirstName(firstName.getText());
-      info.setLastName(lastName.getText());
-      info.setPhoneNumber(phoneNum.getText());
-      info.setEmail(emailTextField.getText());
-      
-      // get an EntityTransaction to manage insert operation
-      EntityTransaction transaction = entityManager.getTransaction();
-      
-      try
-      {
-         transaction.begin(); // start transaction
-         entityManager.persist(info); // store new entry
-         transaction.commit(); // commit changes to the database
-         JOptionPane.showMessageDialog(this, "Person added!",
-            "Person added", JOptionPane.PLAIN_MESSAGE);
-      }
-      catch (Exception e) // if transaction failed
-      {
-         transaction.rollback(); // undo database operations 
-         JOptionPane.showMessageDialog(this, "Person not added!",
-            e.getMessage(), JOptionPane.PLAIN_MESSAGE);
-      }
-   }
     public static void main(String[] args) {
         menu();
         
