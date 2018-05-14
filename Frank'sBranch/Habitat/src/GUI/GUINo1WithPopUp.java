@@ -13,18 +13,31 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.imageio.ImageIO;
-import java.io.*;
 import java.awt.image.*;
 import javax.swing.*;
 import java.awt.*;
-import excelexport.*;
-
-
-import habitat.Info;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
+//import excelexport.*;
 
 
 public class GUINo1WithPopUp extends JFrame {
+    
+    // create an EntityManagerFactory for the persistence unit
+   private static final EntityManagerFactory entityManagerFactory = 
+      Persistence.createEntityManagerFactory("H4HCJHPU");
+
+   // create an EntityManager for interacting with the persistence unit
+   private static final EntityManager entityManager = 
+      entityManagerFactory.createEntityManager();
+   
+   private java.util.List<Info> results;
+   
+   private int numberOfEntries = 0;
+   private int currentEntryIndex;
     private static BufferedImage img;    
     
     public static int textFieldArrNum = 9;
@@ -93,6 +106,8 @@ public class GUINo1WithPopUp extends JFrame {
         "I allow this discription to be quoted:  ",                 // 17
     };
     
+    
+    
     public GUINo1WithPopUp() {               
         JFrame frame = new JFrame("Restore Client Survery");
         JComponent labelsAndComps = setDualColumnFormat(stringLabels, components);
@@ -111,18 +126,18 @@ public class GUINo1WithPopUp extends JFrame {
         
         submit.addActionListener(new ActionListener() { 
          
-            public void actionPerformed(ActionEvent e) { 
-                submit(frame);
+        public void actionPerformed(ActionEvent e) { 
+                  submit(frame);
                 
-                if(counter > 2) {
-                    edit();
-                    setData();
-                    System.exit(0);
+                  if(counter > 2) {
+                      edit();
+                      setData();
+                      System.exit(0);
                     //send stuff to the database
-                }
-            }
+               }
+           }
         });
-        
+
         parseComponentArray(components, textFields, radioButtons);
         frame.add(panelContainer);
         frame.setSize(600, 540);
@@ -131,28 +146,7 @@ public class GUINo1WithPopUp extends JFrame {
         frame.pack();                        
         testBasicGUI(frame, textFields, radioButtons);
     }
-    
-    public static void setData(){
-        Info info = new Info();
-       info.setFirstName(firstName);
-       info.setLastName(lastName);
-       info.setEmail(email);
-       info.setPhoneNum(phoneNum);
-       info.setStreet(street);
-       info.setCity(city);
-       info.setState(stateInitials);
-       info.setZip(Integer.parseInt(zip));
-       info.setComment(comment);
-       info.setNoEmail(noEmail);
-       info.setNoPhoneNum(noPhoneNum);
-       info.setNoAddress(noAddress);
-       info.setEmailContact(emailContact);
-       info.setTextContact(textContact);
-       info.setVolunteer(volunteer);
-       info.setNoComment(noComment);
-       info.setQuote(quote);
-    }
-    
+      
     public JComponent setDualColumnFormat(String[] stringLabels, JComponent[] components) {
         JComponent panel = new JPanel();
         GroupLayout groupLayout = new GroupLayout(panel);
@@ -213,7 +207,7 @@ public class GUINo1WithPopUp extends JFrame {
             }
         }    
     }
-    
+
     private static void testBasicGUI(JFrame frame, JTextField[] textFields, JRadioButton[] radioButtons) {
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frame.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -250,13 +244,7 @@ public class GUINo1WithPopUp extends JFrame {
         });
     }
     
-    private static void submit(JFrame frame) {
-        int popUpAnswer = JOptionPane.showConfirmDialog(null, "Are you sure you want to submit?", "Continue?", 0);
-        if (popUpAnswer == JOptionPane.YES_OPTION){
-            getInfo(textFields, radioButtons);
-            validate(frame);
-        }
-    }
+   
     
     private static void getInfo(JTextField[] textFields, JRadioButton[] radioButtons) {
         firstName = textFields[0].getText();                                   
@@ -278,20 +266,28 @@ public class GUINo1WithPopUp extends JFrame {
         noComment = radioButtons[6].isSelected();
         quote = radioButtons[7].isSelected();
     }
-    
-    private static void edit() {      
-        EditInput.edit(firstName);
-        EditInput.edit(lastName);
-        EditInput.edit(email);
-        EditInput.editPhoneNum(phoneNum);
-        EditInput.edit(street);
-        EditInput.edit(city);
-        EditInput.editState(stateInitials);
-        EditInput.editZip(zip);
-        EditInput.editComment(comment);
+       public static void setData(){
+       Info info = new Info();
+       info.setFirstName(firstName);
+       info.setLastName(lastName);
+       info.setEmail(email);
+       info.setPhoneNum(phoneNum);
+       info.setStreet(street);
+       info.setCity(city);
+       info.setState(stateInitials);
+       //info.setZip(zip);
+       info.setComment(comment);
+       info.setNoEmail(noEmail);
+       info.setNoPhoneNum(noPhoneNum);
+       info.setNoAddress(noAddress);
+       info.setEmailContact(emailContact);
+       info.setTextContact(textContact);
+       info.setVolunteer(volunteer);
+       info.setNoComment(noComment);
+       info.setQuote(quote);
     }
-    
-    private static void validate(JFrame frame) {
+           
+        private static void validate(JFrame frame) {
         String message = "";
         
         if(ValidateInput.validate(firstName) == false)
@@ -323,9 +319,35 @@ public class GUINo1WithPopUp extends JFrame {
         
         if(message != "") {
             JOptionPane.showMessageDialog(frame, message);
+            
+        }
+        else {
+           insertButtonActionPerformed();
+           System.exit(0);
         }
         
         counter++;
+    }
+    private static void edit() {      
+        EditInput.edit(firstName);
+        EditInput.edit(lastName);
+        EditInput.edit(email);
+        EditInput.editPhoneNum(phoneNum);
+        EditInput.edit(street);
+        EditInput.edit(city);
+        EditInput.editState(stateInitials);
+        //EditInput.editZip(zip);
+        EditInput.editComment(comment);
+    }
+    
+    
+    
+     private static void submit(JFrame frame) {
+        int popUpAnswer = JOptionPane.showConfirmDialog(null, "Are you sure you want to submit?", "Continue?", 0);
+        if (popUpAnswer == JOptionPane.YES_OPTION){
+            getInfo(textFields, radioButtons);
+            validate(frame);
+        }
     }
     
   //  public static void writeExcel() throws IOException, WriteException {
@@ -376,7 +398,47 @@ public class GUINo1WithPopUp extends JFrame {
 //            }
 //        });   
     }
-    
+       // handles call when insertButton is clicked
+  private static void insertButtonActionPerformed() 
+   {
+      
+      Info info = new Info();
+      info.setFirstName(firstName);
+      info.setLastName(lastName);
+      info.setEmail(email);
+      info.setPhoneNum(phoneNum);
+      info.setStreet(street);
+      info.setCity(city);
+      info.setState(stateInitials);
+       //FIX THIS ELEMENT info.setZip(zip);
+       info.setComment(comment);
+       info.setNoEmail(noEmail);
+       info.setNoPhoneNum(noPhoneNum);
+       info.setNoAddress(noAddress);
+       info.setEmailContact(emailContact);
+       info.setTextContact(textContact);
+       info.setVolunteer(volunteer);
+       info.setNoComment(noComment);
+       info.setQuote(quote);
+      // get an EntityTransaction to manage insert operation
+      EntityTransaction transaction = entityManager.getTransaction();
+      
+      try
+      {
+        transaction.begin(); // start transaction
+         entityManager.persist(info); // store new entry
+         transaction.commit(); // commit changes to the database
+         JOptionPane.showMessageDialog(null, "Person added!",
+            "Person added", JOptionPane.PLAIN_MESSAGE);
+      }
+      catch (Exception e) // if transaction failed
+      {
+         transaction.rollback(); // undo database operations 
+         JOptionPane.showMessageDialog(null, "Person not added!",
+            e.getMessage(), JOptionPane.PLAIN_MESSAGE);
+      }
+   }
+   
     public static void main(String[] args) {
         menu();
         
