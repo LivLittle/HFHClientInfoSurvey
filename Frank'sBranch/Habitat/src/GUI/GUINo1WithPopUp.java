@@ -28,7 +28,7 @@ public class GUINo1WithPopUp extends JFrame {
     
     // create an EntityManagerFactory for the persistence unit
    private static final EntityManagerFactory entityManagerFactory = 
-      Persistence.createEntityManagerFactory("H4HCJHPU");
+      Persistence.createEntityManagerFactory("HabitatPU");
 
    // create an EntityManager for interacting with the persistence unit
    private static final EntityManager entityManager = 
