@@ -49,6 +49,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Info.findByQuote", query = "SELECT i FROM Info i WHERE i.quote = :quote"),
     @NamedQuery(name = "Info.findByCreateDate", query = "SELECT i FROM Info i WHERE i.createDate = :createDate")})
 public class Info implements Serializable {
+    @Column(name = "Zip")
+    private String zip;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -73,8 +75,6 @@ public class Info implements Serializable {
     private String city;
     @Column(name = "State")
     private String state;
-    @Column(name = "Zip")
-    private Integer zip;
     @Column(name = "NoAddress")
     private Boolean noAddress;
     @Column(name = "EmailContact")
@@ -180,13 +180,6 @@ public class Info implements Serializable {
         this.state = state;
     }
 
-    public Integer getZip() {
-        return zip;
-    }
-
-    public void setZip(Integer zip) {
-        this.zip = zip;
-    }
 
     public Boolean getNoAddress() {
         return noAddress;
@@ -275,6 +268,14 @@ public class Info implements Serializable {
     @Override
     public String toString() {
         return "habitat.Info[ idInfo=" + idInfo + " ]";
+    }
+
+    public String getZip() {
+        return zip;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
     }
     
 }

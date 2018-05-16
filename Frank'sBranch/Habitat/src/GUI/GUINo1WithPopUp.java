@@ -27,17 +27,17 @@ import javax.persistence.TypedQuery;
 public class GUINo1WithPopUp extends JFrame {
     
     // create an EntityManagerFactory for the persistence unit
-   private static final EntityManagerFactory entityManagerFactory = 
+    private static final EntityManagerFactory entityManagerFactory = 
       Persistence.createEntityManagerFactory("HabitatPU");
 
    // create an EntityManager for interacting with the persistence unit
-   private static final EntityManager entityManager = 
+    private static final EntityManager entityManager = 
       entityManagerFactory.createEntityManager();
    
-   private java.util.List<Info> results;
+    private java.util.List<habitat.Info> results;
    
-   private int numberOfEntries = 0;
-   private int currentEntryIndex;
+    private int numberOfEntries = 0;
+    private int currentEntryIndex;
     private static BufferedImage img;    
     
     public static int textFieldArrNum = 9;
@@ -105,8 +105,6 @@ public class GUINo1WithPopUp extends JFrame {
         "I prefer not to answer:  ",                                // 16
         "I allow this discription to be quoted:  ",                 // 17
     };
-    
-    
     
     public GUINo1WithPopUp() {               
         JFrame frame = new JFrame("Restore Client Survery");
@@ -244,8 +242,6 @@ public class GUINo1WithPopUp extends JFrame {
         });
     }
     
-   
-    
     private static void getInfo(JTextField[] textFields, JRadioButton[] radioButtons) {
         firstName = textFields[0].getText();                                   
         lastName  = textFields[1].getText();
@@ -267,7 +263,7 @@ public class GUINo1WithPopUp extends JFrame {
         quote = radioButtons[7].isSelected();
     }
        public static void setData(){
-       Info info = new Info();
+       habitat.Info info = new habitat.Info();
        info.setFirstName(firstName);
        info.setLastName(lastName);
        info.setEmail(email);
@@ -275,7 +271,7 @@ public class GUINo1WithPopUp extends JFrame {
        info.setStreet(street);
        info.setCity(city);
        info.setState(stateInitials);
-       //info.setZip(zip);
+       info.setZip(zip);
        info.setComment(comment);
        info.setNoEmail(noEmail);
        info.setNoPhoneNum(noPhoneNum);
@@ -328,6 +324,7 @@ public class GUINo1WithPopUp extends JFrame {
         
         counter++;
     }
+        
     private static void edit() {      
         EditInput.edit(firstName);
         EditInput.edit(lastName);
@@ -336,13 +333,11 @@ public class GUINo1WithPopUp extends JFrame {
         EditInput.edit(street);
         EditInput.edit(city);
         EditInput.editState(stateInitials);
-        //EditInput.editZip(zip);
+        EditInput.editZip(zip);
         EditInput.editComment(comment);
     }
     
-    
-    
-     private static void submit(JFrame frame) {
+    private static void submit(JFrame frame) {
         int popUpAnswer = JOptionPane.showConfirmDialog(null, "Are you sure you want to submit?", "Continue?", 0);
         if (popUpAnswer == JOptionPane.YES_OPTION){
             getInfo(textFields, radioButtons);
@@ -402,7 +397,7 @@ public class GUINo1WithPopUp extends JFrame {
   private static void insertButtonActionPerformed() 
    {
       
-      Info info = new Info();
+      habitat.Info info = new habitat.Info();
       info.setFirstName(firstName);
       info.setLastName(lastName);
       info.setEmail(email);
@@ -410,7 +405,7 @@ public class GUINo1WithPopUp extends JFrame {
       info.setStreet(street);
       info.setCity(city);
       info.setState(stateInitials);
-       //FIX THIS ELEMENT info.setZip(zip);
+      info.setZip(zip);
        info.setComment(comment);
        info.setNoEmail(noEmail);
        info.setNoPhoneNum(noPhoneNum);
