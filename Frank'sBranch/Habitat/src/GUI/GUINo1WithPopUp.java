@@ -103,7 +103,7 @@ public class GUINo1WithPopUp extends JFrame {
         "I want to be contacted about volunteer information:  ",    // 14
         "What do you like best about ReStore?  ",                   // 15
         "I prefer not to answer:  ",                                // 16
-        "I allow this discription to be quoted:  ",                 // 17
+        "I allow this description to be quoted:  ",                 // 17
     };
     
     public GUINo1WithPopUp() {               
