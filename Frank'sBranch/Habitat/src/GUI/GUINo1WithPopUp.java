@@ -435,7 +435,7 @@ public class GUINo1WithPopUp extends JFrame {
    }
    
     public static void main(String[] args) {
-        menu();
+        new GUINo1WithPopUp();
         
     }
 }
