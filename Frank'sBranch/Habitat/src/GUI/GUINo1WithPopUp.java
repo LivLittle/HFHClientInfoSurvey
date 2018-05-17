@@ -87,8 +87,8 @@ public class GUINo1WithPopUp extends JFrame {
     };
     
     public static String[] stringLabels = {
-        "FirstName:  ",                                             // 1
-        "LastName:  ",                                              // 2
+        "First Name:  ",                                             // 1
+        "Last Name:  ",                                              // 2
         "Email Address:  ",                                         // 3
         "I prefer not to give my email address:  ",                 // 4
         "Phone Number(no dashes)  :  ",                             // 5
