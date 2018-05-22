@@ -16,13 +16,20 @@ import java.awt.event.ActionListener;
 import java.awt.image.*;
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
-//import excelexport.*;
-
+import excelexport.*;
+import java.io.File;
+import jxl.Cell;
+import jxl.Sheet;
+import jxl.Workbook;
+import jxl.read.biff.BiffException;
+import jxl.write.*;
+import jxl.write.Number;
 
 public class GUINo1WithPopUp extends JFrame {
     
@@ -151,7 +158,7 @@ public class GUINo1WithPopUp extends JFrame {
         panel.setLayout(groupLayout);
         groupLayout.setAutoCreateContainerGaps(true);
         JLabel[] labels = new JLabel[stringLabels.length];
-        Font font = new Font("Serif", Font.PLAIN, 20);
+        java.awt.Font font = new java.awt.Font("Serif", java.awt.Font.PLAIN, 20);
 
         for(int i = 0; i < labels.length; i++) {
             labels[i] = new JLabel(stringLabels[i]);
@@ -345,25 +352,37 @@ public class GUINo1WithPopUp extends JFrame {
         }
     }
     
-  //  public static void writeExcel() throws IOException, WriteException {
-    //    try {
-      //      String filename = "C://desktop/file.xls";
-        //    WritableWorkbook workbook = Workbook.createWorkbook(new File(filename));
-          //  WritableSheet sheet = workbook.createSheet("Sheet1", 0);
+    public static void writeExcel() throws IOException, WriteException, BiffException {
+        try {
+            String filename = "file.xls";
+            Workbook wk = Workbook.getWorkbook(new File(filename));
+            WritableWorkbook wkr = Workbook.createWorkbook(new File(filename), wk);
+            WritableSheet getsht = wkr.getSheet(0);
+            WritableCell getcl = getsht.getWritableCell(1,1);
             
-            //adding a label
-            //jxl.write.Label label = new jxl.write.Label(0,0,"A label record");
-            //sheet.addCell(label);
-            //jxl.write.Label label2 = new jxl.write.Label(0,1,"%s", firstName);
-            //Number number = new Number(0,1,3.1415);
-            //sheet.addCell(number);
+            WritableFont ft = new WritableFont(WritableFont.ARIAL, 20, WritableFont.BOLD, true);
+            WritableCellFormat form = new WritableCellFormat(ft);
+                
+            Number nb = ( Number ) getcl;
+            nb.setCellFormat( form );
+            //WritableSheet sheet = workbook.createSheet("Sheet1", 0);
+            //ritableSheet sheet2 = copy.getSheet(1);
+            //WritableCell cell = sheet2.getWritableCell(1, 2);
+//            adding a label
+            /*jxl.write.Label label = new jxl.write.Label(0,0,"A label record");
+            sheet.addCell(label);
+            jxl.write.Label label2 = new jxl.write.Label(0,1,"%s", "first name");
+            Number number = new Number(0,1,3.1415);
+            sheet.addCell(number);
          
-            //workbook.write();
-            //workbook.close();
-        //} catch (WriteException e){
+            workbook.write();*/
+            wkr.write();
+            wkr.close();
+            wk.close();
+        } catch (WriteException e){
             
-        //}
-    //}
+        }
+    }
    
     public static void menu() {
         JFrame menu = new JFrame("Menu");
@@ -435,7 +454,7 @@ public class GUINo1WithPopUp extends JFrame {
    }
    
     public static void main(String[] args) {
-        new GUINo1WithPopUp();
+        menu();
         
     }
 }
